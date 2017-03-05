@@ -50,19 +50,19 @@ public class CryptoOutputStream extends OutputStream implements
     private final byte[] oneByteBuf = new byte[1];
 
     /** The output. */
-    Output output;
+    Output output; // package protected for access by crypto classes; do not expose futher
 
     /** the CryptoCipher instance */
-    final CryptoCipher cipher;
+    final CryptoCipher cipher; // package protected for access by crypto classes; do not expose futher
 
     /** The buffer size. */
-    final int bufferSize;
+    private final int bufferSize;
 
     /** Crypto key for the cipher. */
-    final Key key;
+    final Key key; // package protected for access by crypto classes; do not expose futher
 
     /** the algorithm parameters */
-    final AlgorithmParameterSpec params;
+    private final AlgorithmParameterSpec params;
 
     /** Flag to mark whether the output stream is closed. */
     private boolean closed;
@@ -71,13 +71,13 @@ public class CryptoOutputStream extends OutputStream implements
      * Input data buffer. The data starts at inBuffer.position() and ends at
      * inBuffer.limit().
      */
-    ByteBuffer inBuffer;
+    ByteBuffer inBuffer; // package protected for access by crypto classes; do not expose futher
 
     /**
      * Encrypted data buffer. The data starts at outBuffer.position() and ends
      * at outBuffer.limit().
      */
-    ByteBuffer outBuffer;
+    ByteBuffer outBuffer; // package protected for access by crypto classes; do not expose futher
 
     /**
      * Constructs a {@link CryptoOutputStream}.
@@ -360,7 +360,9 @@ public class CryptoOutputStream extends OutputStream implements
         outBuffer.flip();
 
         // write to output
-        output.write(outBuffer);
+        while (outBuffer.hasRemaining()) {
+            output.write(outBuffer);
+        }
     }
 
     /**
@@ -386,7 +388,9 @@ public class CryptoOutputStream extends OutputStream implements
         outBuffer.flip();
 
         // write to output
-        output.write(outBuffer);
+        while (outBuffer.hasRemaining()) {
+            output.write(outBuffer);
+        }
     }
 
     /**

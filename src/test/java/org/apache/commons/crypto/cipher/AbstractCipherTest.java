@@ -46,7 +46,7 @@ public abstract class AbstractCipherTest {
     public static final int BYTEBUFFER_SIZE = 1000;
 
     public String[] cipherTests = null;
-    Properties props = null;
+    private Properties props = null;
     protected String cipherClass = null;
     protected String[] transformations = null;
 
@@ -55,7 +55,7 @@ public abstract class AbstractCipherTest {
             0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
     static final byte[] IV = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08 };
-    CryptoCipher enc, dec;
+    private CryptoCipher enc, dec;
 
     @Before
     public void setup() {
